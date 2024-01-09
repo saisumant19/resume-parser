@@ -1,58 +1,33 @@
-import formidable from "formidable";
-import FormData from "form-data";
-import fs from "fs";
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    // Return a "method not allowed" error
-    res.status(405).send("Only POST Please");
+  if (req.method !== 'POST') {
+    res.status(405).send('Only POST requests are allowed');
     return;
   }
 
-  const { fields, files } = await new Promise(function (resolve, reject) {
-    const form = new formidable.IncomingForm({ keepExtensions: true });
-    form.parse(req, function (err, fields, files) {
-      if (err) return reject(err);
-      resolve({ fields, files });
-    });
-  });
+  // Assuming the URL is sent in the request body under the key 'url'
+  const { url } = req.body;
 
-  if (!files.resume.path) {
-    res.status(400).send("No resume uploaded!");
+  if (!url) {
+    res.status(400).send('No URL provided');
     return;
   }
 
-  const formData = new FormData();
-  formData.append("resume", fs.createReadStream(files.resume.path));
+  const apikey = 'tgzJal8RPB9lyq9NYp9GgFaG0V9V6vWs'; // Replace with your actual API key
+  const resumeParserUrl = `https://api.apilayer.com/resume_parser/url?url=${encodeURIComponent(url)}`;
 
-  await fetch("https://jobs.lever.co/parseResume", {
-    method: "POST",
-    headers: {
-      Origin: "https://jobs.lever.co",
-      Referer: "https://jobs.lever.co/parse",
-    },
-    body: formData,
+  fetch(resumeParserUrl, {
+    method: 'GET',
+    headers: { 'apikey': apikey },
   })
-    .then((response) => {
+    .then(response => {
       if (!response.ok) {
-        res
-          .status(response.status)
-          .send(
-            response.status == 500
-              ? "Could not parse resume"
-              : "Could not connect to Lever"
-          );
-
-        return;
+        throw new Error('Error parsing resume');
       }
       return response.json();
     })
-    .then((response) => response && res.json(response))
-    .catch(console.error);
+    .then(data => res.json(data))
+    .catch(error => {
+      console.error(error);
+      res.status(500).send('Error parsing resume');
+    });
 }
