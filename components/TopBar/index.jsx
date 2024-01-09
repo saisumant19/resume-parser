@@ -32,8 +32,8 @@ const TopBar = () => {
         <Text fontSize="md" fontWeight="bold" marginBottom={4}>
           How well does your resume get parsed?
         </Text>
-        <Text fontSize="md" mb="4">
-          This tool is designed to analyze and interpret resumes, similar to how many top companies' 
+        <Text fontSize="md" mb="4"> 
+          This tool is designed to analyze and interpret resumes, similar to how many top companies&apos; 
           Application Tracking Systems (ATS) do when you apply for jobs. To use this feature, simply provide the URL of your resume. This feature helps you 
           understand how effectively your resume is read and processed by such systems. 
           The idea came to me while I was helping friends and noticing common mistakes they made in their resumes 
