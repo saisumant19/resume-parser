@@ -15,10 +15,13 @@ const TopBar = () => {
           How well does your resume get parsed?
         </Text>
         <Text fontSize="md">
-          {`This tool uses Lever's resume parsing API to parse resumes. Use this
-          to see how well your resume is read by Application Tracking Systems
-          (ATS) when applying to jobs. Companies that use Lever for job apps
-          include: Figma, Palantir, Netflix, Twitch, Yelp and several others.`}
+          {`This tool is designed to analyze and interpret resumes, similar to how many top companies' 
+          Application Tracking Systems (ATS) do when you apply for jobs. This feature helps you 
+          understand how effectively your resume is read and processed by such systems. 
+          The idea came to me while I was helping friends and noticing common mistakes they made in their resumes 
+          that I had also made in the past. I thought to build a tool to help people easily detect and avoid those mistakes.
+          The goal of this project is to provide everyone with free access to a resume parser and enable anyone to apply for 
+          jobs with confidence. I hope you find this tool useful. Thanks all.`}
         </Text>
       </Box>
       <Box mb="4" mt="4" pl="20" pr="20">
@@ -29,18 +32,8 @@ const TopBar = () => {
           p={0.5}
           isExternal
         >
-          KnlnKS <ExternalLinkIcon mx="2px" />
+          Sai Sumant Kancharla <ExternalLinkIcon mx="2px" />
         </Link>{" "}
-        and{" "}
-        <Link
-          href="https://github.com/kevin51jiang"
-          bg="yellow.200"
-          p={0.5}
-          isExternal
-        >
-          kevin51jiang <ExternalLinkIcon mx="2px" />
-        </Link>
-        .
       </Box>
     </>
   );
