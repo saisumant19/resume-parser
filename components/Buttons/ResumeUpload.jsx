@@ -10,7 +10,7 @@ const ResumeUpload = ({ parseStatus, handleFileInput }) => (
     mr="5"
   >
     <label>
-      Upload resume (docx or pdf)
+      Your information is never stored on servers.
       <input
         name="resume"
         tabIndex="-1"
